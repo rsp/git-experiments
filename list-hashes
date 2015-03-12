@@ -9,6 +9,7 @@ if [ $# -ne 1 ]; then
 	echo "For CWD: $0 ."
 	exit 1
 fi
-directory=$1
 
+cd $1
 git rev-list --objects --all | cut -f 1 -d ' '
+cd -
