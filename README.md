@@ -23,7 +23,17 @@ It was written and tested on Ubuntu 14.04.
 Commands
 --------
 
-...
+### `list-hashes`
+
+Usage: `./list-hashes DIRECTORY`
+
+Example: `./list-hashes .`
+
+### `limit-digits`
+
+Usage: `cat hashes.txt | ./limit-digits NUMBER`
+
+Example: `./list-hashes . | ./limit-digits 7`
 
 Author
 ------
