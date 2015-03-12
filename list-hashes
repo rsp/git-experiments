@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# list-hashes from git-experiments
+# https://github.com/rsp/git-experiments
+# by Rafał Pocztarski - https://github.com/rsp
+
+if [ $# -ne 1 ]; then
+	echo "Usage:   $0 DIRECTORY" >&2
+	echo "For CWD: $0 ."
+	exit 1
+fi
+directory=$1
+
+git rev-list --objects --all | cut -f 1 -d ' '
