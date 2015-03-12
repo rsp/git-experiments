@@ -3,7 +3,9 @@ git-experiments
 
 https://github.com/rsp/git-experiments
 
-Some experiments performed on Git repositories.
+Some experiments performed on Git repositories, originally created
+to to add some experimental data in my answer on Stack Overflow to:
+[How safely can I assume unicity of a part of SHA1 hash?](http://stackoverflow.com/questions/5388781/how-safely-can-i-assume-unicity-of-a-part-of-sha1-hash/5388847#5388847)
 
 This is still work in progress and is not finished yet.
 
