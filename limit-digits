@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# limit-digits from git-experiments
+# https://github.com/rsp/git-experiments
+# by Rafał Pocztarski - https://github.com/rsp
+
+if [[ -t 0 || $# -ne 1 || $1 == *[!0-9]* || $1 < 1 ]]; then
+	echo "Usage: cat hashes.txt | $0 NUMBER_OF_DIGITS" >&2
+	echo "E.g.:  cat hashes.txt | $0 7" >&2
+	echo "It should get the input piped into stdin." >&2
+	exit 1
+fi
+digits=$1
+
+cut -c1-$digits
