@@ -160,6 +160,64 @@ Project | Total | 1DC | 2DC | 3DC | 4DC | 5DC | 6DC | 7DC | 8DC | 9DC | 10DC
 
 A number of collisions is defined as the total number of hashes that collide with some other hashes (e.g. 3 hashes with the same prefix are counted as 3 colliding hashes).
 
+Conclusions
+-----------
+I tested few popular Git repositories of various sizes and searched for collisions of the commit hashes prefixes of different sizes - this is if you only count commits and not other objects.
+
+jQuery has two pairs of colliding 6-digit commit hashes:
+
+* https://github.com/jquery/jquery/commit/a5dbca4
+* https://github.com/jquery/jquery/commit/a5dbcaf
+* https://github.com/jquery/jquery/commit/f717260
+* https://github.com/jquery/jquery/commit/f717261
+
+so eg. this is ambiguous:
+
+* https://github.com/jquery/jquery/commit/a5dbca
+
+and gives 404 even though a shorter one:
+
+* https://github.com/jquery/jquery/commit/66975
+
+works fine (at least for now).
+
+Bootstrap has 3 pairs of 6-digit collisions, e.g.:
+
+* https://github.com/twbs/bootstrap/commit/2a47034
+* https://github.com/twbs/bootstrap/commit/2a47037
+
+PostgreSQL has a 7-digit collision:
+
+* https://github.com/postgres/postgres/commit/aaeef4d1
+* https://github.com/postgres/postgres/commit/aaeef4da
+
+And Linux has 54 colliding 8-digit commit hashes, e.g.:
+
+* https://github.com/torvalds/linux/commit/05fda3b1a
+* https://github.com/torvalds/linux/commit/05fda3b1d
+
+When you get all of the objects with `git rev-list --all --objects` and not only `git rev-list --all` then you get even more collisions (but it takes much longer).
+For example here are two pairs of colliding 11-digit hashes in the Linux repo:
+
+```
+d597639e2036f04f0226761e2d818b31f2db7820
+d597639e203a100156501df8a0756fd09573e2de
+ef91b6e893a00d903400f8e1303efc4d52b710af
+ef91b6e893afc4c4ca488453ea9f19ced5fa5861
+```
+
+so for example:
+
+```
+$ git show d597639e203
+error: short SHA1 d597639e203 is ambiguous.
+error: short SHA1 d597639e203 is ambiguous.
+fatal: ambiguous argument 'd597639e203': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+$
+```
+
 Author
 ------
 Rafał Pocztarski - https://github.com/rsp
