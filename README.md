@@ -138,10 +138,27 @@ git clone https://github.com/rsp/git-experiments.git # 13 commits
 git clone https://github.com/jquery/jquery.git # 6593 commits
 git clone https://github.com/twbs/bootstrap.git # 11232 commits
 git clone https://github.com/postgres/postgres.git # 49405 commits
+git clone https://github.com/gcc-mirror/gcc.git # 188174 commits
 git clone https://github.com/torvalds/linux.git # 506320 commits
 ```
 
+(numbers of commits as of 2015-03-13)
+
 Note: Use the https protocol to get GitHub links in the output.
+
+Example data from 2015-03-13:
+
+Project | TNH | 1DC | 2DC | 3DC | 4DC | 5DC | 6DC | 7DC | 8DC | 9DC | 10DC
+------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ----
+[jquery](https://github.com/jquery/jquery) | 6593 | 6593 | 6593 | 5231 | 590 | 41 | 4 | 0 | 0 | 0 | 0
+[bootstrap](https://github.com/twbs/bootstrap) | 11232 | 11232 | 11232 | 10519 | 1786 | 118 | 6 | 0 | 0 | 0 | 0
+[postgres](https://github.com/postgres/postgres) | 49405 | 49405 | 49405 | 49405 | 25935 | 2185 | 141 | 2 | 0 | 0 | 0
+[gcc](https://github.com/gcc-mirror/gcc) | 188174 | 188174 | 188174 | 188174 | 177476 | 30726 | 2092 | 144 | 10 | 0 | 0
+[linux](https://github.com/torvalds/linux) | 506320 | 506320 | 506320 | 506320 | 506068 | 193608 | 14947 | 924 | 54 | 0 | 0
+
+(TNH - total number of hashes, NDC - N-digit collisions)
+
+A number of collisions is defined as the total number of hashes that collide with some other hashes (e.g. 3 hashes with the same prefix are counted as 3 colliding hashes).
 
 Author
 ------
