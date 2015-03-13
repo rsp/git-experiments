@@ -148,7 +148,7 @@ Note: Use the https protocol to get GitHub links in the output.
 
 Example data from 2015-03-13:
 
-Project | TNH | 1DC | 2DC | 3DC | 4DC | 5DC | 6DC | 7DC | 8DC | 9DC | 10DC
+Project | Total | 1DC | 2DC | 3DC | 4DC | 5DC | 6DC | 7DC | 8DC | 9DC | 10DC
 ------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ----
 [jquery](https://github.com/jquery/jquery) | 6593 | 6593 | 6593 | 5231 | 590 | 41 | 4 | 0 | 0 | 0 | 0
 [bootstrap](https://github.com/twbs/bootstrap) | 11232 | 11232 | 11232 | 10519 | 1786 | 118 | 6 | 0 | 0 | 0 | 0
@@ -156,7 +156,7 @@ Project | TNH | 1DC | 2DC | 3DC | 4DC | 5DC | 6DC | 7DC | 8DC | 9DC | 10DC
 [gcc](https://github.com/gcc-mirror/gcc) | 188174 | 188174 | 188174 | 188174 | 177476 | 30726 | 2092 | 144 | 10 | 0 | 0
 [linux](https://github.com/torvalds/linux) | 506320 | 506320 | 506320 | 506320 | 506068 | 193608 | 14947 | 924 | 54 | 0 | 0
 
-(TNH - total number of hashes, NDC - N-digit collisions)
+(Total - total number of hashes, NDC - N-digit collisions)
 
 A number of collisions is defined as the total number of hashes that collide with some other hashes (e.g. 3 hashes with the same prefix are counted as 3 colliding hashes).
 
