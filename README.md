@@ -13,6 +13,7 @@ Prerequisites
 -------------
 * [Bash](https://www.gnu.org/software/bash/)
 * [Git](http://git-scm.com/)
+* sed, awk, grep, cut, sort, uniq, wc, etc. ([basic Unix tools](http://www.cs.toronto.edu/~maclean/csc209/unixtools.html))
 * possibly more...
 
 It should work on any standard Linux/Unix distribution. If it doesn't,
@@ -23,17 +24,64 @@ It was written and tested on Ubuntu 14.04.
 Commands
 --------
 
-### `list-hashes`
+### Basic
+
+#### `list-hashes`
 
 Usage: `./list-hashes DIRECTORY`
 
 Example: `./list-hashes .`
 
-### `limit-digits`
+#### `limit-digits`
 
 Usage: `cat hashes.txt | ./limit-digits NUMBER`
 
 Example: `./list-hashes . | ./limit-digits 7`
+
+### Complex
+
+#### `list-collisions`
+
+List hash collisions for a certain number of digits (7 by default) in a given repository.
+
+Usage: `./list-collisions DIRECTORY [DIGITS]`
+
+where DIRECTORY is a path to a Git repository (a dot for CWD) and DIGITS is the hash length.
+
+Example:
+
+```bash
+git clone https://github.com/jquery/jquery.git
+./list-collisions jquery 6
+```
+
+#### `count-collisions`
+
+Count the number of hash collisions for every hash length for a given repository.
+
+Usage: `./count-collisions DIRECTORY`
+
+where DIRECTORY is a path to a Git repository (a dot for CWD).
+
+```bash
+git clone https://github.com/jquery/jquery.git
+./count-collisions jquery
+```
+
+Examples
+--------
+
+Clone Bootstrap repository and check for 4-digit 
+
+```bash
+git clone git@github.com:twbs/bootstrap.git
+
+```
+
+```bash
+git clone https://github.com/jquery/jquery.git
+
+```
 
 Author
 ------
