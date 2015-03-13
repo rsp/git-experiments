@@ -10,6 +10,9 @@ objects=""
 
 if [[ $# -lt 1 || $# -gt 2 ||
 	$# -eq 2 && ( $2 == *[!0-9]* || $2 < 1 ) ]]; then
+	echo "list-collisions from git-experiments" >&2
+	echo "https://github.com/rsp/git-experiments" >&2
+	echo "by Rafał Pocztarski - https://github.com/rsp" >&2
 	echo "Usage:   $0 DIRECTORY [DIGITS]" >&2
 	echo "Example: $0 ." >&2
 	echo "By default: DIGITS = 7"
@@ -45,6 +48,10 @@ git rev-list --all $objects | cut -f 1 -d ' ' > $hashes
 
 total=`cat $hashes | wc -l`
 
+echo -e "\nlist-collisions from git-experiments"
+echo -e "https://github.com/rsp/git-experiments"
+echo -e "by Rafał Pocztarski - https://github.com/rsp\n"
+
 echo -e "Directory:\t$dir"
 echo -e "Repository:\t$url"
 [ -n "$github" ] && echo -e "GitHub page:\t$github"
@@ -58,7 +65,6 @@ echo "Unique: $unique, Colliding: $colliding, Noncolliding: $noncolliding"
 
 if [ $colliding -gt 0 ]; then
 	prefixlist=`cat $hashes | cut -c1-$digits | sort | uniq -d`
-	echo prefixlist: "$prefixlist"
 
 	echo -e "\nHashes that collide with first $digits digits:"
 

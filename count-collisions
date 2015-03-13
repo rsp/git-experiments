@@ -12,6 +12,9 @@ digits_min=1
 objects=""
 
 if [ $# -ne 1 ]; then
+	echo "count-collisions from git-experiments" >&2
+	echo "https://github.com/rsp/git-experiments" >&2
+	echo "by Rafał Pocztarski - https://github.com/rsp" >&2
 	echo "Usage:   $0 DIRECTORY" >&2
 	echo "For CWD: $0 ." >&2
 	exit 1
@@ -44,10 +47,14 @@ if [[ $url =~ ^https://github.com/[^/]+/[^/.]+.git$ ]]; then
 	github=${url//.git/}
 fi
 
+echo -e "\ncount-collisions from git-experiments"
+echo -e "https://github.com/rsp/git-experiments"
+echo -e "by Rafał Pocztarski - https://github.com/rsp\n"
+
 echo -e "Directory:\t$dir"
 echo -e "Repository:\t$url"
 [ -n "$github" ] && echo -e "GitHub page:\t$github"
-echo -e "Total objects:\t$total"
+echo -e "Total objects:\t$total\n"
 
 digits=$digits_min
 colliding=x
