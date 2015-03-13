@@ -44,10 +44,10 @@ if [[ $url =~ ^https://github.com/[^/]+/[^/.]+.git$ ]]; then
 	github=${url//.git/}
 fi
 
-echo "Directory: $dir"
-echo "Repository: $url"
-[ "$github" != "" ] && echo -e "GitHub: $github"
-echo "Total objects: $total"
+echo -e "Directory:\t$dir"
+echo -e "Repository:\t$url"
+[ "$github" != "" ] && echo -e "GitHub page:\t$github"
+echo -e "Total objects:\t$total"
 
 digits=$digits_min
 colliding=x
