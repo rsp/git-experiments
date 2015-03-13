@@ -39,9 +39,15 @@ git rev-list --all $objects | cut -f 1 -d ' ' > $hashes
 
 total=`cat $hashes | wc -l`
 
-echo -e "Directory:\t$dir"
-echo -e "Repository:\t$url"
-echo -e "Total objects:\t$total"
+github=
+if [[ $url =~ ^https://github.com/[^/]+/[^/.]+.git$ ]]; then
+	github=${url//.git/}
+fi
+
+echo "Directory: $dir"
+echo "Repository: $url"
+[ "$github" != "" ] && echo -e "GitHub: $github"
+echo "Total objects: $total"
 
 digits=$digits_min
 colliding=x
