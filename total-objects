@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# total-objects from git-experiments
+# https://github.com/rsp/git-experiments
+# by Rafał Pocztarski - https://github.com/rsp
+
+# use --objects flag in git rev-list:
+#objects="--objects"
+objects=""
+
+clonecommand=""
+
+if [ $# -ne 1 ]; then
+	echo "total-objects from git-experiments" >&2
+	echo "https://github.com/rsp/git-experiments" >&2
+	echo "by Rafał Pocztarski - https://github.com/rsp" >&2
+	echo "Usage:   $0 DIRECTORY" >&2
+	echo "For CWD: $0 ." >&2
+	exit 1
+fi
+
+dir=$1
+cd $dir || {
+	echo "Cannot cd into '$dir'" >&2
+	exit 2
+}
+
+url=`git config --get remote.origin.url`
+if [ "$url" == "" ]; then
+	echo "Cannot get git remote 'origin' in '$dir'" >&2
+	exit 3
+fi
+
+total=`git rev-list --all $objects | cut -f 1 -d ' ' | wc -l`
+
+github=
+if [[ $url =~ ^https://github.com/[^/]+/[^/.]+.git$ ]]; then
+	github=${url//.git/}
+fi
+
+if [ -n "$clonecommand" ]; then
+	echo "git clone $url # $total commits"
+	exit
+fi
+
+echo -e "\ntotal-objects from git-experiments"
+echo -e "https://github.com/rsp/git-experiments"
+echo -e "by Rafał Pocztarski - https://github.com/rsp\n"
+
+echo -e "Directory:\t$dir"
+echo -e "Repository:\t$url"
+[ -n "$github" ] && echo -e "GitHub page:\t$github"
+echo -e "Total objects:\t$total\n"
+
