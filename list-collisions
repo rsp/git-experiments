@@ -30,6 +30,11 @@ if [ "$url" == "" ]; then
 	exit 3
 fi
 
+github=
+if [[ $url =~ ^https://github.com/[^/]+/[^/.]+.git$ ]]; then
+	github=${url//.git/}
+fi
+
 hashes=`mktemp`
 if [ "$hashes" == "" ]; then
 	echo "Cannot create a temp file." >&2
@@ -42,6 +47,7 @@ total=`cat $hashes | wc -l`
 
 echo -e "Directory:\t$dir"
 echo -e "Repository:\t$url"
+[ -n "$github" ] && echo -e "GitHub page:\t$github"
 echo -e "Total objects:\t$total"
 echo -e "Using digits:\t$digits"
 
@@ -57,6 +63,14 @@ if [ $colliding -gt 0 ]; then
 	echo -e "\nHashes that collide with first $digits digits:"
 
 	grep -F "$prefixlist" $hashes | sort
+
+	if [ -n "$github" ]; then
+
+		echo -e "\nGitHub commit URLs of hashes that collide with first $digits digits:"
+		grep -F "$prefixlist" $hashes | sort | awk "\$0=\"$github/commit/\"\$0"
+
+	fi
+
 fi
 
 rm $hashes

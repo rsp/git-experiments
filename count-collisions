@@ -13,7 +13,7 @@ objects=""
 
 if [ $# -ne 1 ]; then
 	echo "Usage:   $0 DIRECTORY" >&2
-	echo "For CWD: $0 ."
+	echo "For CWD: $0 ." >&2
 	exit 1
 fi
 
@@ -46,7 +46,7 @@ fi
 
 echo -e "Directory:\t$dir"
 echo -e "Repository:\t$url"
-[ "$github" != "" ] && echo -e "GitHub page:\t$github"
+[ -n "$github" ] && echo -e "GitHub page:\t$github"
 echo -e "Total objects:\t$total"
 
 digits=$digits_min
