@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# row-count-collisions from git-experiments
+# https://github.com/rsp/git-experiments
+# by Rafał Pocztarski - https://github.com/rsp
+
+# starting number of hash digits:
+digits_min=1
+
+# use --objects flag in git rev-list:
+#objects="--objects"
+objects=""
+
+if [ $# -ne 1 ]; then
+	echo "row-count-collisions from git-experiments" >&2
+	echo "https://github.com/rsp/git-experiments" >&2
+	echo "by Rafał Pocztarski - https://github.com/rsp" >&2
+	echo "Usage:   $0 DIRECTORY" >&2
+	echo "For CWD: $0 ." >&2
+	exit 1
+fi
+
+dir=$1
+cd $dir || {
+	echo "Cannot cd into '$dir'" >&2
+	exit 2
+}
+
+url=`git config --get remote.origin.url`
+if [ "$url" == "" ]; then
+	echo "Cannot get git remote 'origin' in '$dir'" >&2
+	exit 3
+fi
+
+hashes=`mktemp`
+if [ "$hashes" == "" ]; then
+	echo "Cannot create a temp file." >&2
+	exit 3
+fi
+
+git rev-list --all $objects | cut -f 1 -d ' ' > $hashes
+
+total=`cat $hashes | wc -l`
+
+github=
+if [[ $url =~ ^https://github.com/[^/]+/[^/.]+.git$ ]]; then
+	github=${url//.git/}
+fi
+
+digits=$digits_min
+colliding=x
+
+echo -n "[$dir]($github) | $total"
+
+while [ $digits -le 10 ]; do
+	unique=`cat $hashes | cut -c1-$digits | sort | uniq | wc -l`
+	colliding=`cat $hashes | cut -c1-$digits | sort | uniq -D | wc -l`
+	noncolliding=$(($total-$colliding))
+	echo -n " | $colliding"
+	digits=$(($digits+1))
+done
+echo
+
+rm $hashes
+
